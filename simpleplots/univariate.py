@@ -3,25 +3,13 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 
-def plot_count(data: pd.Series, **kwargs):
-    plt.figure(**kwargs)
-    plt.title(f"{data.name} count")
-    sns.countplot(x=data)
-    plt.xlabel(None)
-    plt.show()
+def plot_count(data: pd.Series, axis):
+    sns.countplot(y=data, ax=axis)
 
 
-def plot_hist(data: pd.Series, axis, **kwargs):
-    # plt.figure(**kwargs)
-    # plt.title(f"{data.name} histogram")
+def plot_hist(data: pd.Series, axis):
     sns.histplot(x=data, ax=axis)
-    # plt.xlabel(None)
-    # plt.show()
 
 
-def plot_box(data: pd.Series, axis, **kwargs):
-    # plt.figure(**kwargs)
-    # plt.title(f"{data.name} boxplot")
+def plot_box(data: pd.Series, axis):
     sns.boxplot(x=data, ax=axis)
-    # plt.xlabel(None)
-    # plt.show()

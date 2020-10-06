@@ -19,6 +19,10 @@ def plot(data: pd.DataFrame, attribute: [str, list], **kwargs):
         elif is_bool_dtype(data[attribute].dtype):
             plot_count(data[attribute], **kwargs)
         elif is_numeric_dtype(data[attribute].dtype):
-            plot_hist(data[attribute], **kwargs)
+            fig, ax = plt.subplots(2, 1)
+            fig.suptitle(f"{attribute}")
+            plot_hist(data[attribute], axis=ax[0])
+            plot_box(data[attribute], axis=ax[1])
+            fig.show()
     elif isinstance(attribute, list):
         print("Multivariate plot")

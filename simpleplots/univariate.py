@@ -11,17 +11,17 @@ def plot_count(data: pd.Series, **kwargs):
     plt.show()
 
 
-def plot_hist(data: pd.Series, **kwargs):
-    plt.figure(**kwargs)
-    plt.title(f"{data.name} histogram")
-    sns.histplot(x=data)
-    plt.xlabel(None)
-    plt.show()
+def plot_hist(data: pd.Series, axis, **kwargs):
+    # plt.figure(**kwargs)
+    # plt.title(f"{data.name} histogram")
+    sns.histplot(x=data, ax=axis)
+    # plt.xlabel(None)
+    # plt.show()
 
 
-def plot_box(data: pd.Series, **kwargs):
-    plt.figure(**kwargs)
-    plt.title(f"{data.name} boxplot")
-    sns.boxplot(x=data)
-    plt.xlabel(None)
-    plt.show()
+def plot_box(data: pd.Series, axis, **kwargs):
+    # plt.figure(**kwargs)
+    # plt.title(f"{data.name} boxplot")
+    sns.boxplot(x=data, ax=axis)
+    # plt.xlabel(None)
+    # plt.show()

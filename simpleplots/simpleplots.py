@@ -13,8 +13,9 @@ def plot(
     data: pd.DataFrame,
     attribute: [str, list],
     title: str = None,
-    size: tuple = (5, 3),
-    log_scale: bool = False,
+    size: tuple = (5, 5),
+    scale: bool = True,
+    scale_threshold: float = 10e2,
     categorify: bool = True,
     max_categories: int = 10,
 ):
@@ -34,17 +35,22 @@ def plot(
             | is_categorical_dtype(data[attribute].dtype)
             | is_bool_dtype(data[attribute].dtype)
         ):
-            fig, ax = plt.subplots(1, 1, figsize=size)
-            fig.suptitle(title)
-            plot_count(data[attribute], axis=ax)
-            fig.show()
+            if len(data[attribute].unique()) <= max_categories:
+                fig, ax = plt.subplots(1, 1, figsize=size)
+                fig.suptitle(title)
+                plot_count(data[attribute], axis=ax)
+                fig.show()
+            else:
+                print("Too many unique values. Change max_categories argument value.")
         elif is_numeric_dtype(data[attribute].dtype):
             fig, ax = plt.subplots(2, 1, figsize=size)
             fig.suptitle(title)
             plot_hist(data[attribute], axis=ax[0])
             ax[0].set_xlabel(None)
             plot_box(data[attribute], axis=ax[1])
-            if log_scale:
+            if scale & (
+                (data[attribute].max() - data[attribute].min()) > scale_threshold
+            ):
                 ax[0].set(xscale="log")
                 ax[1].set(xscale="log")
             fig.show()
